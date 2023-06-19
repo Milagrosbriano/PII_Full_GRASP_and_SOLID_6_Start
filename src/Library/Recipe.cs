@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Full_GRASP_And_SOLID
 {
@@ -62,5 +63,38 @@ namespace Full_GRASP_And_SOLID
 
             return result;
         }
+        
+
+        public int GetCookTime()
+        {
+            int totalTime = 0; 
+            foreach(BaseStep step in this.steps)
+            {
+                totalTime += step.Time;
+            }
+            return totalTime;
+        }
+        
+
+        private bool cooked = false;
+        public bool Cooked 
+        {
+            get     
+            {
+                return cooked;
+            }
+        }
+        public void Cook()
+
+        {
+            int cookTime = GetCookTime();
+            Thread.Sleep(cookTime); 
+            //El metodo Thread es un método que suspende la ejecución del hilo actual durante un período de tiempo determminado, durante ese tiempo el hilo actual no realiza ninguna tarea. 
+            cooked = true;
+        }
+
+
+
+
     }
 }
